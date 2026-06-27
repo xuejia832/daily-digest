@@ -290,6 +290,77 @@
   /* Smooth scroll */
   html { scroll-behavior: smooth; }
 
+  /* ── Filtered / Editor Notes (collapsible) ── */
+  .filtered-section,
+  .editor-notes-section {
+    margin-top: 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .filtered-summary,
+  .editor-notes-summary {
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.02);
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .filtered-summary:hover,
+  .editor-notes-summary:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+  }
+
+  .filtered-section[open] .filtered-summary,
+  .editor-notes-section[open] .editor-notes-summary {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filtered-list {
+    list-style: none;
+    padding: 12px 16px;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .filtered-item {
+    padding: 5px 0;
+    font-size: 12px;
+    color: #8b8fa3;
+    line-height: 1.5;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .filtered-item:last-child {
+    border-bottom: none;
+  }
+
+  .filtered-item a {
+    color: #7176b5;
+  }
+
+  .editor-notes-body {
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #8b8fa3;
+    line-height: 1.6;
+    max-height: 360px;
+    overflow-y: auto;
+  }
+
+  .editor-notes-body h1 { font-size: 14px; margin: 8px 0 4px; }
+  .editor-notes-body h2 { font-size: 13px; margin: 6px 0 3px; }
+  .editor-notes-body h3 { font-size: 12px; margin: 4px 0 2px; }
+  .editor-notes-body p { font-size: 12px; margin: 4px 0; }
+  .editor-notes-body ul { margin: 4px 0; }
+  .editor-notes-body li { font-size: 12px; padding: 2px 0; }
+
   /* Footer */
   .site-footer {
     margin-top: 40px;
@@ -306,7 +377,7 @@
 <!-- Sidebar -->
 <aside class="sidebar">
   <div class="sidebar-title">📰 日报 · Daily Digest</div>
-  <div class="sidebar-subtitle">Updated: 2026-06-28 03:41</div>
+  <div class="sidebar-subtitle">Updated: 2026-06-28 03:42</div>
   <div class="sidebar-section">按日期</div>
   <a href="#date-2026-06-28" class="date-nav-item"><span>06/28 日</span><span class="nav-badge" style="background:#6366f1">Builders</span><span class="nav-badge" style="background:#10b981">Agent</span></a>
 </aside>
@@ -315,7 +386,7 @@
 <main class="main">
   <div class="site-header">
     <h1>日报 · Daily Digest</h1>
-    <div class="updated">最后更新：2026-06-28 03:41</div>
+    <div class="updated">最后更新：2026-06-28 03:42</div>
   </div>
 
   
@@ -379,6 +450,23 @@
 <hr class="section-divider">
 
 <p>*AI Builders Daily · 2026年6月26日*</p>
+
+
+
+
+            
+    <details class="filtered-section">
+        <summary class="filtered-summary">🗑️ 已过滤内容（45条）— 点击展开</summary>
+        <ul class="filtered-list">
+            <li class="filtered-item"><a href="https://www.producthunt.com/products/polygraph" target="_blank" rel="noopener">Polygraph</a> — 淘汰理由：PH来源，Agent跨仓库记忆概念有趣但缺乏GitHub/社区验证，PH独立信号不足以入选</li><li class="filtered-item"><a href="https://www.producthunt.com/products/blop-ai" target="_blank" rel="noopener">Blop</a> — 淘汰理由：PH来源，AI测试工具但信息不足，无法评估工程深度</li><li class="filtered-item"><a href="https://www.producthunt.com/products/oxlo-ai" target="_blank" rel="noopener">Oxlo.ai</a> — 淘汰理由：泛AI成本优化工具，无差异化信号，非Builder核心关注</li><li class="filtered-item"><a href="https://www.producthunt.com/products/vtt-for-mac" target="_blank" rel="noopener">VTT for Mac</a> — 淘汰理由：纯消费者语音转文字工具，非AI Builder相关</li><li class="filtered-item"><a href="https://www.producthunt.com/products/nashra-turn-followers-into-clients" target="_blank" rel="noopener">Nashra</a> — 淘汰理由：社交媒体转化工具，与AI Builder无关</li><li class="filtered-item"><a href="https://www.producthunt.com/products/heron" target="_blank" rel="noopener">Heron</a> — 淘汰理由：Agent eBPF可观测性概念优秀（"Wireshark for AI Agents"），但PH来源缺乏GitHub/社区验证，留待后续交叉验证</li><li class="filtered-item"><a href="https://arstechnica.com/health/2026/06/military-branches-restore-flu-shot-requirement-after-virus-swept-through-base/" target="_blank" rel="noopener">Military branches restore flu shot</a> — 淘汰理由：公共卫生/军事新闻，与AI Builder无关</li><li class="filtered-item"><a href="https://expression.fire.org/p/the-papers-please-era-of-the-internet" target="_blank" rel="noopener">The 'papers, please' era of the internet</a> — 淘汰理由：互联网隐私话题，低互动（2pts），非Builder相关</li><li class="filtered-item"><a href="https://www.nijho.lt/post/proxmox-to-nixos/" target="_blank" rel="noopener">Migrating from Proxmox to NixOS and Incus</a> — 淘汰理由：DevOps基础设施迁移，非AI主题（29pts）</li><li class="filtered-item"><a href="https://om.co/2026/06/24/1966-2026/" target="_blank" rel="noopener">Om Malik has died</a> — 淘汰理由：科技人物悼念，269pts热度高但与Builder无关</li><li class="filtered-item"><a href="https://calpaterson.com/bank-python.html" target="_blank" rel="noopener">An oral history of Bank Python (2021)</a> — 淘汰理由：技术历史文章（53pts），非AI Builder相关</li><li class="filtered-item"><a href="https://williamdue.github.io/blog/parallel-parentheses-matching" target="_blank" rel="noopener">Parallel Parentheses Matching</a> — 淘汰理由：算法优化文章（41pts），非AI Builder相关</li><li class="filtered-item"><a href="https://rozumem.xyz/posts/17" target="_blank" rel="noopener">The Doorman's Fallacy in action</a> — 淘汰理由：设计/哲学类文章（36pts），非Builder相关</li><li class="filtered-item"><a href="https://www.ycombinator.com/companies/besimple-ai/jobs/yWfhhOR-strategic-projects-lead-audio-data" target="_blank" rel="noopener">Besimple AI (YC P25) Is Hiring</a> — 淘汰理由：招聘帖，非内容</li><li class="filtered-item"><a href="https://github.com/xbtlin/ai-berkshire" target="_blank" rel="noopener">xbtlin/ai-berkshire</a> ⭐1,828 — 淘汰理由：AI价值投资工具，领域过于垂直（股票分析），1.8K⭐且非Agent/MCP基础设施，不达Builder通用工具门槛</li><li class="filtered-item"><a href="https://github.com/ZhuLinsen/daily_stock_analysis" target="_blank" rel="noopener">daily_stock_analysis</a> ⭐48K — 淘汰理由：🟡WARNING连续2天淘汰，已提升优先级并触发换入换出比较。48K股票领域专用工具，无Agent/MCP集成关键词。与已占位最弱（Anthropic-Cybersecurity-Skills 21K⭐）比较：后者为Agent基础设施（安全skills），前者为领域垂直工具，保留后者</li><li class="filtered-item"><a href="https://github.com/opendatalab/MinerU" target="_blank" rel="noopener">opendatalab/MinerU</a> ⭐69,540 — 淘汰理由：成熟文档解析基础设施，≥50K⭐检查通过（无MCP/agent集成层），且属老项目非本周新趋势</li><li class="filtered-item"><a href="https://github.com/mauriceboe/TREK" target="_blank" rel="noopener">mauriceboe/TREK</a> ⭐6,620 — 淘汰理由：自托管旅行规划工具，与AI Builder无关</li><li class="filtered-item"><a href="https://github.com/apple/container" target="_blank" rel="noopener">apple/container</a> ⭐43,191 — 淘汰理由：macOS容器工具，系统基础设施但与AI无关</li><li class="filtered-item"><a href="https://techcrunch.com/2026/06/25/polymarket-says-hackers-stole-users-funds/" target="_blank" rel="noopener">Polymarket says hackers stole users' funds</a> — 淘汰理由：加密货币平台安全事故，非AI Builder相关</li><li class="filtered-item"><a href="https://techcrunch.com/2026/06/25/anthropics-claude-is-winning-over-paid-consumers-a-market-owned-by-chatgpt/" target="_blank" rel="noopener">Anthropic's Claude is winning over paid consumers</a> — 淘汰理由：消费者市场竞争动态，与Builder工具体验间接相关但非核心信号</li><li class="filtered-item"><a href="https://techcrunch.com/2026/06/25/general-intuitions-2-3b-bet-that-video-games-can-train-ai-agents-for-the-real-world/" target="_blank" rel="noopener">General Intuition's $2.3B bet on video games</a> — 淘汰理由：$320M融资（非$2.3B），游戏训练agent概念早期，实际工程路径不清晰</li><li class="filtered-item"><a href="https://techcrunch.com/2026/06/25/databricks-former-ai-chief-thinks-he-can-cut-ais-power-bill-by-1000x/" target="_blank" rel="noopener">Databricks' former AI chief thinks he can cut AI's power bill by 1,000x</a> — 淘汰理由：与Un-0同一事件（已入选Discussion），TC角度偏商业包装</li><li class="filtered-item"><a href="https://techcrunch.com/2026/06/25/parker-conrad-knows-which-employees-are-worth-their-ai-spend-and-says-rippling-can-help-you-too/" target="_blank" rel="noopener">Rippling now wants to be your entire data stack</a> — 淘汰理由：HR/薪酬数据栈产品，非AI Builder核心关注</li><li class="filtered-item"><a href="https://www.ben-evans.com/benedictevans/2026/5/24/ai-job-exposure" target="_blank" rel="noopener">Predicting AI job exposure</a> — 淘汰理由：Benedict Evans深度分析但已33天，超30天时效阈值；BE源日期过滤问题持续未修复</li><li class="filtered-item"><a href="https://www.ben-evans.com/benedictevans/2026/2/19/how-will-openai-compete-nkg2x" target="_blank" rel="noopener">How will OpenAI compete?</a> — 淘汰理由：2026年2月旧文（4个月），BE源重复返回旧文</li><li class="filtered-item"><a href="https://www.ben-evans.com/benedictevans/2025/11/23/ai-networks-and-mechanical-turks" target="_blank" rel="noopener">AI, networks and Mechanical Turks</a> — 淘汰理由：2025年11月旧文（7个月），BE源重复返回旧文</li><li class="filtered-item"><a href="https://bdtechtalks.com/2026/06/08/codev-3-ai-assisted-coding/" target="_blank" rel="noopener">Beyond vibe coding: How Codev 3.0 engineers the AI-powered dev team</a> — 淘汰理由：AI辅助编码工具（6月8日，18天前），板块已满，loop engineering文章质量更高</li><li class="filtered-item"><a href="https://bdtechtalks.com/2026/06/01/ai-harness-scaling/" target="_blank" rel="noopener">Why the future of agentic AI is all about the harness</a> — 淘汰理由：Agent harness主题（6月1日，25天前），时效性不足且板块已满</li><li class="filtered-item"><a href="https://bdtechtalks.com/2026/05/25/composer-25-llm-self-distillation/" target="_blank" rel="noopener">How Cursor's Composer 2.5 uses self-distillation to beat the frontier LLMs at coding</a> — 淘汰理由：深度技术文章但已32天，超时效阈值。连续多周出现（已在5/16-6/13期间多次被过滤），旧文重抓</li><li class="filtered-item"><a href="https://bdtechtalks.com/2026/05/24/vertical-integration-as-ai-infrastructure-what-21ds-full-arch-implant-system-teaches-us-about-building-autonomous-clinical-ai/" target="_blank" rel="noopener">Vertical integration as AI infrastructure (21D clinical AI)</a> — 淘汰理由：医疗领域垂直案例（33天前），领域过于垂直且超时效阈值</li><li class="filtered-item"><a href="https://bdtechtalks.com/2026/05/18/openclaw-sandbox-vulnerability/" target="_blank" rel="noopener">Why sandboxing OpenClaw doesn't stop data exfiltration</a> — 淘汰理由：安全研究（39天前），超时效阈值。根据QUALITY_MEMORY规则，平台安全相关内容时效门槛3个月，但38天仍可考虑——本次因板块已满且loop engineering文章更强而淘汰</li><li class="filtered-item"><a href="https://www.technologyreview.com/2026/06/25/1137848/repositioning-retail-for-the-ai-era/" target="_blank" rel="noopener">Repositioning retail for the AI era</a> — 淘汰理由：零售行业AI应用，无技术细节，为行业趋势综述非Builder实操内容</li><li class="filtered-item"><a href="https://www.technologyreview.com/2026/06/25/1139738/the-download-europe-heat-wave-ibm-chip-moores-law/" target="_blank" rel="noopener">The Download: Europe heat wave + IBM chip</a> — 淘汰理由：MIT TR The Download简报，按规则排除</li><li class="filtered-item"><a href="https://www.technologyreview.com/2026/06/25/1139696/ibm-unveils-sub1nm-chip/" target="_blank" rel="noopener">IBM sub-1nm chip</a> — 淘汰理由：硬件/芯片制造突破，非AI Builder相关</li><li class="filtered-item"><a href="https://www.technologyreview.com/2026/06/24/1139676/europe-heat-power-plants/" target="_blank" rel="noopener">Europe extreme heat shutting down power plants</a> — 淘汰理由：气候变化/能源新闻，无关</li><li class="filtered-item"><a href="https://www.technologyreview.com/2026/06/24/1139658/the-download-introducing-engineering-issue/" target="_blank" rel="noopener">The Download: introducing the Engineering issue</a> — 淘汰理由：MIT TR The Download简报，按规则排除</li><li class="filtered-item"><a href="https://www.technologyreview.com/2026/06/24/1139621/stripe-anthropic-and-openai-are-backing-an-effort-to-stop-respiratory-infections/" target="_blank" rel="noopener">Stripe, Anthropic, and OpenAI backing respiratory infections effort</a> — 淘汰理由：公共卫生/慈善新闻，AI公司参与但与Builder无关</li><li class="filtered-item"><a href="https://www.kdnuggets.com/top-7-coding-models-you-can-run-locally-in-2026" target="_blank" rel="noopener">Top 7 Coding Models You Can Run Locally in 2026</a> — 淘汰理由：教程/列表类文章，信息密度低，按QUALITY_MEMORY规则排除</li><li class="filtered-item"><a href="https://www.kdnuggets.com/2026/06/abacus/abacus-ai-chatllm-review" target="_blank" rel="noopener">ChatLLM by Abacus AI Review</a> — 淘汰理由：产品评测，商业推广性质重，按QUALITY_MEMORY规则排除</li><li class="filtered-item"><a href="https://blogs.nvidia.com/blog/geforce-now-thursday-steam-summer-sale-2026/" target="_blank" rel="noopener">The Ultimate Summer Sale: Steam + GeForce NOW</a> — 淘汰理由：游戏促销，无关</li><li class="filtered-item"><a href="https://blogs.nvidia.com/blog/nvidia-aws-ai-production-scale/" target="_blank" rel="noopener">NVIDIA and AWS Collaborate to Bring AI to Production at Scale</a> — 淘汰理由：PR合作公告，缺乏Builder可操作的技术细节</li><li class="filtered-item"><a href="https://blogs.nvidia.com/blog/nvidia-agent-toolkit-open-models-tools-skills-secure-runtime-ai-agents/" target="_blank" rel="noopener">How Businesses Are Building Specialized AI They Can Trust</a> — 淘汰理由：NVIDIA Nemotron PR文章，推广性质的模型/工具介绍</li><li class="filtered-item"><a href="https://blogs.nvidia.com/blog/telecom-ai-agents-dtw-ignite-2026/" target="_blank" rel="noopener">NVIDIA Brings AI Agents to Telecom Operations</a> — 淘汰理由：电信行业垂直案例，PR性质，非Builder通用</li><li class="filtered-item"><a href="https://blogs.nvidia.com/blog/nairr-scientific-research-ai-infrastructure/" target="_blank" rel="noopener">NAIRR Science Program Reshapes Scientific Research</a> — 淘汰理由：学术研究基础设施项目，PR性质，非Builder直接相关</li>
+        </ul>
+    </details>
+    <details class="editor-notes-section">
+        <summary class="editor-notes-summary">📝 编辑笔记 — 点击展开</summary>
+        <div class="editor-notes-body">
+            <p>删/留: PH 6进0 | HN 10进1(Un-0) | GH-Python 5进3 | GH-All 6进1(design.md,其余去重) | TC 8进3 | BE 3进0 | BD 6进1 | MIT 6进0 | KD 4进2 | NVIDIA 5进0 总计: 59条原始 → 11条入选（含Focus 2、Tools 3、Agent 3、Discussion 3），入选率 18.6% 弱板: 今日PH无一入选（6条全淘汰），NVIDIA（5条全PR稿），MIT TR（6条中4条为The Download简报、2条无关） 信号最强源: GitHub Trending（Python + All），TC今日Agent相关信号集中 改进建议: (1) PH需建立GitHub交叉验证才能考虑——Heron和Polygraph在概念上有价值但缺乏社区验证信号 (2) BE仅1篇在30天内，其余2篇仍为4+个月旧文，日期过滤仍未修复 (3) NVIDIA Blog持续低信号，考虑降为每周采一次</p>
+        </div>
+    </details>
         </div>
     </section>
     <section class="digest-section" data-type="agent">
@@ -452,6 +540,7 @@
 
 <p>*🌍 Agent × 本地生活平台 日报 · OpenClaw · 2026-04-23*</p>
 
+            
         </div>
     </section>
             </div>

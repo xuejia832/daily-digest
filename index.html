@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日报 · Daily Digest</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg-card: #1a1d2e;
+    --bg-nav: #141724;
+    --text: #e2e4e9;
+    --text-dim: #8b8fa3;
+    --border: #252840;
+    --accent: #6366f1;
+    --accent-green: #10b981;
+    --accent-amber: #f59e0b;
+    --link: #818cf8;
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: var(--bg-nav);
+    border-right: 1px solid var(--border);
+    padding: 24px 16px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+
+  .sidebar-subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+  }
+
+  .sidebar-section {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-dim);
+    margin: 16px 0 8px;
+    padding-left: 4px;
+  }
+
+  .date-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 2px;
+    transition: background 0.15s;
+  }
+
+  .date-nav-item:hover {
+    background: rgba(99, 102, 241, 0.12);
+  }
+
+  .date-nav-item:target,
+  .date-nav-item.active {
+    background: rgba(99, 102, 241, 0.2);
+    color: #fff;
+  }
+
+  .nav-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #fff;
+    margin-left: auto;
+  }
+
+  /* ── Main ── */
+  .main {
+    flex: 1;
+    padding: 32px 40px;
+    max-width: 900px;
+  }
+
+  .site-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .site-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .site-header .updated {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  /* ── Date Sections ── */
+  .date-section {
+    margin-bottom: 48px;
+  }
+
+  .date-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Digest Card ── */
+  .digests-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .digest-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .digest-header {
+    padding: 14px 20px;
+    border-left: 4px solid var(--accent);
+    background: rgba(255,255,255,0.02);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .digest-emoji { font-size: 20px; }
+  .digest-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .digest-body {
+    padding: 20px 24px 28px;
+  }
+
+  .digest-body h1 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+
+  .digest-body h2 {
+    font-size: 16px;
+    margin: 24px 0 12px;
+    color: #c4c8da;
+  }
+
+  .digest-body h3 {
+    font-size: 14px;
+    margin: 16px 0 8px;
+    color: #a5a9bc;
+  }
+
+  .digest-body p {
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .digest-body a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+
+  .digest-body a:hover {
+    border-bottom-color: var(--link);
+  }
+
+  .digest-body ul {
+    list-style: none;
+    margin: 8px 0 16px;
+  }
+
+  .digest-body li {
+    padding: 6px 0;
+    font-size: 14px;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .digest-body li::before {
+    content: "·";
+    position: absolute;
+    left: 6px;
+    color: var(--text-dim);
+    font-weight: bold;
+  }
+
+  .digest-body .icon-list li {
+    padding-left: 0;
+  }
+
+  .digest-body .icon-list li::before {
+    content: none;
+  }
+
+  .digest-body blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 8px 16px;
+    margin: 12px 0;
+    background: rgba(99, 102, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #b4b8cc;
+  }
+
+  .digest-body code {
+    background: rgba(255,255,255,0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: "SF Mono", "Fira Code", monospace;
+  }
+
+  .digest-body hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  .digest-body strong {
+    color: #fff;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-dim);
+    font-size: 16px;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    body { flex-direction: column; }
+    .sidebar {
+      width: 100%;
+      min-width: unset;
+      height: auto;
+      max-height: 200px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .main {
+      padding: 20px 16px;
+    }
+    .digest-body {
+      padding: 16px;
+    }
+  }
+
+  /* Smooth scroll */
+  html { scroll-behavior: smooth; }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-title">📰 日报 · Daily Digest</div>
+  <div class="sidebar-subtitle">Updated: 2026-06-28 03:37</div>
+  <div class="sidebar-section">按日期</div>
+  <a href="#date-2026-06-28" class="date-nav-item"><span>06/28 日</span><span class="nav-badge" style="background:#6366f1">Builders</span><span class="nav-badge" style="background:#10b981">Agent</span></a>
+</aside>
+
+<!-- Main Content -->
+<main class="main">
+  <div class="site-header">
+    <h1>日报 · Daily Digest</h1>
+    <div class="updated">最后更新：2026-06-28 03:37</div>
+  </div>
+
+  
+        <div class="date-section" id="date-2026-06-28">
+            <h1 class="date-heading">2026年06月28日 星期日</h1>
+            <div class="digests-grid">
+                
+    <section class="digest-section" data-type="builders">
+        <div class="digest-header" style="border-left-color: #6366f1">
+            <span class="digest-emoji">🤖</span>
+            <span class="digest-label">AI Builders Digest</span>
+        </div>
+        <div class="digest-body">
+            <h1>🤖 AI Builders Daily</h1>
+<p>**2026年6月26日**</p>
+
+<hr class="section-divider">
+
+<h2>🔥 今日焦点</h2>
+
+<blockquote>🔥 <strong>\1</strong> — 白宫罕见直接干预模型发布节奏，要求先向特定合作伙伴开放而非公众。同期消息：OpenAI推迟IPO至明年。监管加码 + 商业节奏放缓，Builder可用的前沿模型窗口在收窄。</blockquote>
+
+<blockquote>🔥 <strong>\1</strong> — Notion正式终止Notion Mail，承认用户越来越倾向让AI Agent接管邮箱。成熟SaaS公司用产品决策投票：Agent不只是新功能，而是替代旧产品形态。</blockquote>
+
+<hr class="section-divider">
+
+<h2>🛠️ 工具 · 项目</h2>
+
+<ul><li>🛠️ <a href="\2" target="_blank" rel="noopener">\1</a> ⭐19,133 — Google定义了一套让coding agent理解品牌视觉的格式规范。Agent不是写代码就完了，Google在解决"Agent产出长什么样"这层问题。</li></ul>
+
+<ul><li>🛠️ <a href="\2" target="_blank" rel="noopener">\1</a> ⭐22,019 — 首个开源agentic视频制作系统：12条处理流水线、52个工具，把视频制作从人工剪辑变成agent调度。本周GitHub综合热度最高。</li></ul>
+
+<ul><li>🛠️ <a href="\2" target="_blank" rel="noopener">\1</a> ⭐21,208 — 817个结构化网络安全技能，覆盖6种安全框架，直接给AI Agent用的安全能力库。Agent能做的安全审计，比单个人类工程师广得多。</li></ul>
+
+<hr class="section-divider">
+
+<h2>🤖 Agent · 平台</h2>
+
+<ul><li>📈 <a href="\2" target="_blank" rel="noopener">\1</a> ⭐1,124 — AWS官方发布MCP servers + skills + plugins，让AI agent直接在AWS上构建。继Anthropic之后，又一云厂商下场做agent工具生态。不再是"开发者自建MCP"，大厂开始铺基础设施。</li></ul>
+
+<ul><li>📈 <a href="\2" target="_blank" rel="noopener">\1</a> — 一个新的开放Web标准，让任何网站都能向浏览器中的AI agent暴露可调用的结构化工具。MCP从本地→Web的延伸，可能改变agent与网站的交互方式。</li></ul>
+
+<ul><li>📈 <a href="\2" target="_blank" rel="noopener">\1</a> — 前Meta AI研究员创办的agent测试公司，客户需求"几乎无法满足"。Agent可靠性评估正在成为独立赛道——不是锦上添花，是刚需。</li></ul>
+
+<hr class="section-divider">
+
+<h2>💬 热议 · 观点</h2>
+
+<ul><li>💡 <a href="\2" target="_blank" rel="noopener">\1</a> — 系统性的agent循环设计指南，从loop退化（loopmaxxing）到有效控制，覆盖了当前agent工程中最容易出问题的环节。BD Tech Talks本周最有实操价值的文章。</li></ul>
+
+<ul><li>💡 <a href="\2" target="_blank" rel="noopener">\1</a> — 前Databricks AI负责人用模拟计算替代数字计算做图像生成。不只是论文，已展示实际输出。如果可行，AI推理的硬件假设将被重写。</li></ul>
+
+<ul><li>💡 <a href="\2" target="_blank" rel="noopener">\1</a> — 不是技术不行，是团队对agent部署有5个系统性认知偏差。直面当前builder踩坑最多的环节——工程组织而非模型能力。</li></ul>
+
+<hr class="section-divider">
+
+<h2>💭 今日洞察</h2>
+
+<ul><li>Google定义design.md、AWS发布MCP工具、WebMCP推进Web标准——大厂和标准组织在同一周布局agent基础设施层，赛道正从"个体探索"转向"平台级竞争"</li><li>Notion放弃邮件产品转向agent，是对"agent取代传统界面"的最强产品背书——不是PPT概念，是砍掉自己产品线</li><li>Agent测试/评估/可观测性成为本周隐性主线：Patronus（压力测试）+ loop engineering（循环控制）+ Heron（eBPF监控，PH在榜），agent可靠性工具链可能是下一个引爆点</li></ul>
+
+<hr class="section-divider">
+
+<p>*AI Builders Daily · 2026年6月26日*</p>
+        </div>
+    </section>
+    <section class="digest-section" data-type="agent">
+        <div class="digest-header" style="border-left-color: #10b981">
+            <span class="digest-emoji">🌍</span>
+            <span class="digest-label">Agent × 本地生活</span>
+        </div>
+        <div class="digest-body">
+            <h1>🌍 Agent × 本地生活平台 日报</h1>
+<p>**2026年4月23日**</p>
+
+<hr class="section-divider">
+
+<h2>🎯 本期主题</h2>
+
+<p>AI Agent 正在从"聊天界面"进化为"交易入口"——企业级 Agent 平台密集落地，MCP 协议进入大规模采纳阶段，平台级 API 开放浪潮初现端倪。</p>
+
+<hr class="section-divider">
+
+<h2>⚡ 3 秒速览</h2>
+
+<p>📌 Google 发布 Gemini Enterprise Agent Platform，面向 IT/技术用户的企业级 Agent 构建工具 📌 NVIDIA GTC 2026 发布企业级 AI Agent 平台，Adobe、Salesforce、SAP 等 17 家企业首批采纳 📌 Cloudflare 发布 MCP 采纳参考架构，大幅降低企业部署成本与安全风险 📌 Google Workspace 全面接入 AI，AI Overviews 进入 Gmail 工作场景</p>
+
+<hr class="section-divider">
+
+<h2>🤖 Agent × 平台：重大集成动态</h2>
+
+<ul><li><strong>\1</strong> — 面向 IT 和技术用户的企业级 Agent 构建平台，Google Cloud 同步推出 TPU 新芯片为推理提供算力支撑</li></ul>
+
+<ul><li><strong>\1</strong> — SAP CX 解决方案中的 Joule Agents 可直接调用 Gemini Enterprise，营销活动构建与优化全流程 Agent 化</li></ul>
+
+<ul><li><strong>\1</strong> — Adobe 在 Summit 上推出端到端 Agentic AI 系统，联手 NVIDIA AI Agents + WPP 实现创意智能自动化，Agent 成为企业创意工作流的直接执行者</li></ul>
+
+<ul><li><strong>\1</strong> — Adobe、Salesforce、SAP 等组成首批生态，NVIDIA Agent Toolkit + Open Agent Development Platform 为企业提供 Agent 构建与运行全栈能力</li></ul>
+
+<hr class="section-divider">
+
+<h2>🔬 技术底座进展</h2>
+
+<ul><li><strong>\1</strong> — Cloudflare 发布企业级 MCP 部署参考架构，覆盖安全性、成本优化与规模化难题，MCP 协议正从实验走向生产级标准</li></ul>
+
+<ul><li><strong>\1</strong> — 安全研究者披露 Anthropic MCP 架构级缺陷，暴露数百万依赖 MCP 的 Agent 供应链风险，协议安全性进入行业视野</li></ul>
+
+<ul><li><strong>\1</strong> — Opus 4.7 在复杂推理任务上有显著提升，为 Agent 执行多步骤交易任务提供更强基础模型支撑</li></ul>
+
+<ul><li><strong>\1</strong> — 企业级 Agent 开发体验大幅升级，Routines 支持工作流自动化复用，降低企业 Agent 开发门槛</li></ul>
+
+<hr class="section-divider">
+
+<h2>💡 产品与生态信号</h2>
+
+<ul><li><strong>\1</strong> — 浏览器从"访问工具"进化为"AI 执行环境"，Chrome 内置 Agent 能力可自动化网页操作，为 Agent 直接操作本地生活平台界面铺路</li></ul>
+
+<ul><li><strong>\1</strong> — AI 自动汇总跨邮件关键信息，个人助理能力从邮件场景延伸到任务理解与执行规划</li></ul>
+
+<ul><li><strong>\1</strong> — 将 PaaS 简单性与企业级安全带入 VMware Cloud Foundation 上的 AI Agents，企业内网 Agent 部署有了标准化路径</li></ul>
+
+<hr class="section-divider">
+
+<h2>🔗 延伸阅读</h2>
+
+<ul><li><a href="\2" target="_blank" rel="noopener">\1</a> — 了解企业如何安全、低成本地大规模部署 MCP</li><li><a href="\2" target="_blank" rel="noopener">\1</a> — 了解 NVIDIA 企业级 Agent 开发全栈方案</li></ul>
+
+<hr class="section-divider">
+
+<h2>💭 趋势洞察</h2>
+
+<p>平台级 Agent 集成正在从"可能性探索"进入"规模化落地"阶段。NVIDIA、Adobe、SAP 的生态抱团，以及 Google Gemini Enterprise Agent Platform 的发布，标志着 Agent 不再是单一模型能力，而是需要平台、协议、工具链共同支撑的系统工程。下一阶段的关键变量是：谁来定义 Agent × 本地生活平台的 API 标准——是 MCP、还是各大厂自有的 Function Calling 规范？这将决定 Agent 作为"交易入口"的开放程度。</p>
+
+<hr class="section-divider">
+
+<p>*🌍 Agent × 本地生活平台 日报 · OpenClaw · 2026-04-23*</p>
+
+        </div>
+    </section>
+            </div>
+        </div>
+
+  <div class="site-footer">
+    Built with ❤️ by OpenClaw · Powered by AI
+  </div>
+</main>
+
+</body>
+</html>
